@@ -1,0 +1,12 @@
+[
+    {
+        "ID": 5555,
+        "Accounts": [
+            {
+                "Account_name": "Private account",
+                "Balance": 1000.0
+            }
+        ]
+        
+    }
+]
