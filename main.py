@@ -1,6 +1,8 @@
 import functions as func
+import os
 
 id = None
+accounts = None
 
 # Loop
 while True:
@@ -9,10 +11,13 @@ while True:
     
     #If login was chosen then ask for username and password
     if ans == "1":
+        os.system("clear")
         username = input("Username: ")
+        os.system("clear")
         password = input("Password: ")
+        os.system("clear")
         #If username and password was correct then the ID for that user is returned
-        IndentationError = func.login(username, password)
+        id = func.login(username, password)
         #If id = None the loop will continue because the username or password was wrong
         if id == None:
             continue
@@ -20,8 +25,14 @@ while True:
         else:
             break
     elif ans == "2":
-        print("WIP")
-        break
+        os.system("clear")
+        username = input("Username: ")
+        os.system("clear")
+        password = input("Password: ")
+        os.system("clear")
+        func.create_account(username, password)
+        print("account created")
+        continue
     #if "1" or "2" wasn't typed in Retry! will be printed and the loop will continue and run again 
     else:
         print("\n Retry! \n")
@@ -29,8 +40,20 @@ while True:
 #checks if id has a value then run a new loop for choosing the next options
 if id != None:
     while True:
-        print("""1. See accounts
-        2. See transaktions
-        3. Send money
-        4. Open new account""")
-        ans = input("> ")
+        ans = input("""1. See accounts
+        2. New account
+        > """)
+        if ans == "1":
+            accounts = func.get_account_details(id)
+        os.system('clear')
+        if accounts != None:
+            for i in accounts:
+                print("Name: " + i["Account_name"] + "\nBalance: " + i["Balance"] + " kr" + "\nRouting number: " + i["Routing"])
+            break
+        elif accounts == None:
+            os.system('clear')
+            print("No accounts")
+            break
+            
+        
+
