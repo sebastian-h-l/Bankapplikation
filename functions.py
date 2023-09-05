@@ -1,5 +1,7 @@
 import json
 import random
+import os
+
 #Creates a function that checks if credentials match and then return id for the user
 def login(username, password):
     #open credentials.json in read mode
@@ -16,7 +18,7 @@ def login(username, password):
             continue
     
     f.close()
-def create_account(username, password):
+def create_user(username, password):
     user = {}         # Tom dictionary
     user["Username"] = username
     user["Password"] = password
@@ -39,10 +41,22 @@ def get_account_details(ID):
             return i["Accounts"]
 
 def create_account(ID, accountname):
+    account = {}
+    account["Accountname"] = accountname
+    account["Balance"] = "1000.00"
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
     for i in t1:
         if i["ID"] == ID:
-            user = i
-    user["Accounts"]
+            amount = str(len(i["Accounts"]) + 1)
+            print(amount)
+            if len(amount) < 3:
+                amount = (3 - len(amount)) * '0' + amount
+            print(amount)
+            account["Routing"] = amount
+            i["Accounts"].append(account)
+            with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                json.dump(t1, fw)
 
+def clear():
+    os.system('cls||clear')
