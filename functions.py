@@ -41,22 +41,29 @@ def get_account_details(ID):
             return i["Accounts"]
 
 def create_account(ID, accountname):
+    user_excist = False
     account = {}
-    account["Accountname"] = accountname
+    account["Account_name"] = accountname
     account["Balance"] = "1000.00"
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
     for i in t1:
         if i["ID"] == ID:
+            user_excist = True
             amount = str(len(i["Accounts"]) + 1)
-            print(amount)
             if len(amount) < 3:
                 amount = (3 - len(amount)) * '0' + amount
-            print(amount)
             account["Routing"] = amount
             i["Accounts"].append(account)
             with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
                 json.dump(t1, fw)
+    if user_excist == False:
+        user = {}
+        user["ID"] = ID
+        user["Accounts"] = [{"Account_name": accountname, "Balance": "1000.00", "Routing": "001"}]
+        t1.append(user)
+        with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+            json.dump(t1, fw)
 
 def clear():
     os.system('cls||clear')
