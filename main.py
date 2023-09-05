@@ -46,16 +46,25 @@ if id != None:
             if accounts != None:
                 for i in accounts:
                     print("Name: " + i["Account_name"] + "\nBalance: " + i["Balance"] + " kr" + "\nRouting number: " + i["Routing"] + "\n")
-                break
+                ans = input("1. Select account by routing number\n2. Back\n> ")
+                if ans == "1":
+                    route_number = input("Routing number: ")
+                    ans = input("1. Deposit\n2. Withdraw\n3. Transfer\n> ")
+                    if ans == "1":
+                        amount = input("How much: ")
+                        func.deposit(id, route_number, amount)
+                        continue
+                elif ans == "2":
+                    continue
             elif accounts == None:
                 func.clear()
                 print("No accounts")
-                break
+                continue
         if ans == "2":
             func.clear()
             account_name = input("Account name: ")
             func.create_account(id, account_name)
-            break
+            continue
 
             
         

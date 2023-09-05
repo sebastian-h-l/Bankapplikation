@@ -44,7 +44,7 @@ def create_account(ID, accountname):
     user_excist = False
     account = {}
     account["Account_name"] = accountname
-    account["Balance"] = "1000.00"
+    account["Balance"] = "1000.0"
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
     for i in t1:
@@ -60,10 +60,22 @@ def create_account(ID, accountname):
     if user_excist == False:
         user = {}
         user["ID"] = ID
-        user["Accounts"] = [{"Account_name": accountname, "Balance": "1000.00", "Routing": "001"}]
+        user["Accounts"] = [{"Account_name": accountname, "Balance": "1000.0", "Routing": "001"}]
         t1.append(user)
         with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
             json.dump(t1, fw)
+
+def deposit(id, route, amount):
+    with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == id:
+            for i in i["Accounts"]:
+                if i["Routing"] == route:
+                    i["Balance"] = str(float(i["Balance"]) + float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
+        
 
 def clear():
     os.system('cls||clear')
