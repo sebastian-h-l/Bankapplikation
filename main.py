@@ -54,6 +54,10 @@ if id != None:
                         amount = input("How much: ")
                         func.deposit(id, route_number, amount)
                         continue
+                    elif ans == "2":
+                        amount = input("How much: ")
+                        func.withdraw(id, route_number, amount)
+                        continue
                 elif ans == "2":
                     continue
             elif accounts == None:

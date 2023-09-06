@@ -75,7 +75,17 @@ def deposit(id, route, amount):
                     i["Balance"] = str(float(i["Balance"]) + float(amount))
                     with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
                         json.dump(t1, fw)
-        
+    
+def withdraw(id, route, amount):
+    with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == id:
+            for i in i["Accounts"]:
+                if i["Routing"] == route:
+                    i["Balance"] = str(float(i["Balance"]) - float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
 
 def clear():
     os.system('cls||clear')
