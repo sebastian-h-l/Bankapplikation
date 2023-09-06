@@ -1,7 +1,7 @@
 Vad för funktioner ska finnas:
 
-- [ ] Sätta in pengar
-- [ ] Ta ut pengar
+- [x] Sätta in pengar
+- [x] Ta ut pengar
 - [ ] Visa upp alla transaktioner
 - [ ] Transaktioner ska lagras i fil
 - [x] Saldot på kontot ska beräknas
@@ -9,7 +9,7 @@ Vad för funktioner ska finnas:
 
 Tillägg:
 
-- [ ] Anpassa applikation för decimal
+- [x] Anpassa applikation för decimal
 - [ ] Lägg till datum och tid för transaktioner
 
 För högre betyg än E/C:
