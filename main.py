@@ -58,6 +58,17 @@ if id != None:
                         amount = input("How much: ")
                         func.withdraw(id, route_number, amount)
                         continue
+                    elif ans == "3":
+                        ans = input("1. Internal transfer\n2. External transfer\n> ")
+                        if ans == "1":
+                            amount = input("How much: ")
+                            reaciving_route = input("Input recieving account route number: ")
+                            func.internal_transfer(id, route_number, reaciving_route, amount)
+                        elif ans == "2":
+                            amount = input("How much: ")
+                            reaciving_user = input("Input recieving user: ")
+                            reaciving_route = input("Input recieving account route number: ")
+                            func.external_transfer(id, reaciving_user, route_number, reaciving_route, amount)
                 elif ans == "2":
                     continue
             elif accounts == None:

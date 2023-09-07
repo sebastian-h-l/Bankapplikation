@@ -87,5 +87,60 @@ def withdraw(id, route, amount):
                     with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
                         json.dump(t1, fw)
 
+def display_users():
+    with open("jsons/credentials.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        print(i["Username"])
+
+
+def external_transfer(id, reciever, self_route, reciever_route, amount):
+    reciever_id = None
+    with open("jsons/credentials.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["Username"] == reciever:
+            reciever_id = i["ID"]
+    with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == id:
+            for i in i["Accounts"]:
+                if i["Routing"] == self_route:
+                    i["Balance"] = str(float(i["Balance"]) - float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
+    with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == reciever_id:
+            for i in i["Accounts"]:
+                if i["Routing"] == reciever_route:
+                    i["Balance"] = str(float(i["Balance"]) + float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
+
+def internal_transfer(id, self_route, reciever_route, amount):
+    with open("jsons/credentials.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == id:
+            for i in i["Accounts"]:
+                if i["Routing"] == self_route:
+                    i["Balance"] = str(float(i["Balance"]) - float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
+    with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
+        t1 = json.load(fr)
+    for i in t1:
+        if i["ID"] == id:
+            for i in i["Accounts"]:
+                if i["Routing"] == reciever_route:
+                    i["Balance"] = str(float(i["Balance"]) + float(amount))
+                    with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
+                        json.dump(t1, fw)
+
+    
+
 def clear():
     os.system('cls||clear')
