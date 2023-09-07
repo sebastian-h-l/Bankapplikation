@@ -5,41 +5,12 @@ accounts = None
 
 # Loop
 while True:
-    #Ask to chose beetween login and creating a new account
-    ans = input("1. Login \n2. Create Account \n> ")
+    func.login_menu()
     
-    #If login was chosen then ask for username and password
-    if ans == "1":
-        func.clear()
-        username = input("Username: ")
-        func.clear()
-        password = input("Password: ")
-        func.clear()
-        #If username and password was correct then the ID for that user is returned
-        id = func.login(username, password)
-        #If id = None the loop will continue because the username or password was wrong
-        if id == None:
-            continue
-        #If id has a value the loop will end
-        else:
-            break
-    elif ans == "2":
-        func.clear()
-        username = input("Username: ")
-        func.clear()
-        password = input("Password: ")
-        func.clear()
-        func.create_user(username, password)
-        print("New user created")
-        continue
-    #if "1" or "2" wasn't typed in Retry! will be printed and the loop will continue and run again 
-    else:
-        print("\n Retry! \n")
-        continue
 #checks if id has a value then run a new loop for choosing the next options
 if id != None:
     while True:
-        ans = input("1. See accounts\n2. New account\n> ")
+        ans = input("1. See accounts\n2. New account\n3. See history\n> ")
         if ans == "1":
             accounts = func.get_account_details(id)
             func.clear()
@@ -80,6 +51,8 @@ if id != None:
             account_name = input("Account name: ")
             func.create_account(id, account_name)
             continue
+        elif ans == "3":
+            func.print_history(id)
 
             
         
