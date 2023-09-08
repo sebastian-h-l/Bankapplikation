@@ -2,15 +2,15 @@ Vad för funktioner ska finnas:
 
 - [x] Sätta in pengar
 - [x] Ta ut pengar
-- [ ] Visa upp alla transaktioner
-- [ ] Transaktioner ska lagras i fil
+- [x] Visa upp alla transaktioner
+- [x] Transaktioner ska lagras i fil
 - [x] Saldot på kontot ska beräknas
 - [x] Vid uppstart av - bankkonto får kunden 1000kr
 
 Tillägg:
 
 - [x] Anpassa applikation för decimal
-- [ ] Lägg till datum och tid för transaktioner
+- [x] Lägg till datum och tid för transaktioner
 
 För högre betyg än E/C:
 

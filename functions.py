@@ -21,64 +21,29 @@ def login(username, password):
             return i["ID"]
         
 def create_user(username, password):
-    user = {}         # Tom dictionary
-    user["Username"] = username
-    user["Password"] = password
-    user["ID"] = str(random.randint(1000, 9999))
+    user = {"Username": username, "Password": password, "ID": str(random.randint(1000, 9999))}
     with open("jsons/credentials.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
-        t1.append(user)
+    t1.append(user)
     with open("jsons/credentials.json", "w", encoding="utf-8") as fw:
         json.dump(t1, fw)     
    
-def login_menu():
-    ans = input("1. Login \n2. Create Account \n> ")
-    
-    match ans:
-        case "1":
-            username = input("Username: ")
-            clear()
-            password = input("Password: ")
-            clear()
-            #If username and password was correct then the ID for that user is returned
-            id = login(username, password)
-            if id == None:
-                login_menu()
-        case "2":
-            clear()
-            username = input("Username: ")
-            clear()
-            password = input("Password: ")
-            clear()
-            create_user(username, password)
-            print("New user created")
-            login_menu()
-        case _:
-            clear()
-            print("\n Retry! \n")
-            login_menu()
-    
-
-
 def get_account_details(ID):
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
     for i in t1:
         if i["ID"] == ID:
-            print(i["Accounts"])
             return i["Accounts"]
 
 def create_account(ID):
     account_name = input("New accounts name: ")
-    user_excist = False
-    account = {}
-    account["Account_name"] = account_name
-    account["Balance"] = "1000.0"
+    account_excist = False
+    account = {"Account_name": account_name, "Balance": "1000.0"}
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
         t1 = json.load(fr)
     for i in t1:
         if i["ID"] == ID:
-            user_excist = True
+            account_excist = True
             amount = str(len(i["Accounts"]) + 1)
             if len(amount) < 3:
                 amount = (3 - len(amount)) * '0' + amount
@@ -86,23 +51,15 @@ def create_account(ID):
             i["Accounts"].append(account)
             with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
                 json.dump(t1, fw)
-    if user_excist == False:
+    if account_excist == False:
         user = {}
         user["ID"] = ID
-        user["Accounts"] = [{"Account_name": accountname, "Balance": "1000.0", "Routing": "001"}]
+        user["Accounts"] = [{"Account_name": account_name, "Balance": "1000.0", "Routing": "001"}]
         t1.append(user)
         with open("jsons/accounts.json", "w", encoding="utf-8") as fw:
             json.dump(t1, fw)
 
-def second_menu():
-    ans = input("1. See accounts\n2. New account\n3. See history\n> ")
-    match ans:
-        case "1":
-            accounts = func.get_account_details(id)
-            clear()
-            if accounts != None:
-                for i in accounts:
-                    print("Name: " + i["Account_name"] + "\nBalance: " + i["Balance"] + " kr" + "\nRouting number: " + i["Routing"] + "\n")
+
 
 def deposit(id, route, amount):
     with open("jsons/accounts.json", "r", encoding="utf-8") as fr:
@@ -222,5 +179,3 @@ def print_history(id):
             print("History")
             for i in i["History"]:
                 print(i)
-    
-
